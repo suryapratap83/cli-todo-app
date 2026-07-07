@@ -1,4 +1,30 @@
+import os
+
 tasks = []
+
+
+def load_task(tasks):
+    if os.path.exists("tasks.txt"):
+
+        with open("tasks.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                parts = line.strip().split("|")
+                tasks.append({"task": parts[0], "done": parts[1]})
+ 
+        return tasks
+    else:
+        return []
+
+
+def save_task(tasks):
+
+    with open("tasks.txt", "w") as f:
+        for task in tasks:
+            f.write(task["task"] + "|" + str(task["done"]) + "\n")
+
+
+tasks = load_task(tasks)
 
 while True:
     print("1. Add task")
