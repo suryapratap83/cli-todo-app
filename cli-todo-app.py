@@ -29,7 +29,8 @@ tasks = load_task(tasks)
 while True:
     print("1. Add task")
     print("2. View tasks")
-    print("3. Exit")
+    print("3. Mark tasks done")
+    print("4. Exit")
 
     choose = input("Choose: ")
 
@@ -44,8 +45,18 @@ while True:
         else:
             for i, task in enumerate(tasks, 1):
                 print(i, "|", task["task"], "|", "✅" if task["done"] else "❌")
-
+                
     elif choose == "3":
+         for i, task in enumerate(tasks, 1):
+            print(i, "|", task["task"], "|", "✅" if task["done"] == True else "❌")
+
+        
+         number=int(input("Enter task number: "))
+         tasks[number - 1]["done"] = True
+         save_task(tasks)
+         print("Task change confirmed")
+        
+    elif choose == "4":
         print("Exiting!")
         exit()
 
