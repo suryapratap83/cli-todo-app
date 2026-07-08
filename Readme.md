@@ -5,9 +5,9 @@ A command-line to-do app built in Python to manage your tasks.
 ## Features
 - Add tasks
 - View all tasks with status
-- file handling
-     -loadtask() 
-     -savetask()
+- Save and load tasks from a file
+- Mark tasks as done
+
 ## How to Run
 
 Make sure Python is installed, then run:
