@@ -7,6 +7,7 @@ A command-line to-do app built in Python to manage your tasks.
 - View all tasks with status
 - Save and load tasks from a file
 - Mark tasks as done
+- Delete tasks
 
 ## How to Run
 
