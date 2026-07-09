@@ -30,7 +30,8 @@ while True:
     print("1. Add task")
     print("2. View tasks")
     print("3. Mark tasks done")
-    print("4. Exit")
+    print("4. Delete tasks")
+    print("5 Exit")
 
     choose = input("Choose: ")
 
@@ -38,6 +39,7 @@ while True:
         task = input("Enter task: ")
         tasks.append({"task": task, "done": False})
         print("Task added!")
+        
 
     elif choose == "2":
         if len(tasks) == 0:
@@ -45,6 +47,8 @@ while True:
         else:
             for i, task in enumerate(tasks, 1):
                 print(i, "|", task["task"], "|", "✅" if task["done"] else "❌")
+        
+                
                 
     elif choose == "3":
          for i, task in enumerate(tasks, 1):
@@ -55,8 +59,20 @@ while True:
          tasks[number - 1]["done"] = True
          save_task(tasks)
          print("Task change confirmed")
+       
+    
+    elif choose=="4":
+        for i, task in enumerate(tasks, 1):
+            print(i, "|", task["task"], "|", "✅" if task["done"] == True else "❌")
+    
+        number1 = int(input("Task to delete: "))
+        tasks.pop(number1 - 1)
+        save_task(tasks)
+        print("Task was deleted")
+
         
-    elif choose == "4":
+
+    elif choose == "5":
         print("Exiting!")
         exit()
 
