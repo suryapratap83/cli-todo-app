@@ -27,54 +27,102 @@ def save_task(tasks):
 tasks = load_task(tasks)
 
 while True:
-    print("1. Add task")
-    print("2. View tasks")
-    print("3. Mark tasks done")
-    print("4. Delete tasks")
-    print("5 Exit")
+    print("1.Add task")
+    print("2.View task")
+    print("3.Mark task done")
+    print("4.Delete task")
+    print("5.Search task")
+    print("6.Exit")
 
-    choose = input("Choose: ")
+    choose = input("Choose: ") 
 
     if choose == "1":
-        task = input("Enter task: ")
-        tasks.append({"task": task, "done": False})
-        print("Task added!")
-        
+        while True:
+            task = input("Enter task: ")
+            if task.strip() == "":
+             print("Task cannot be empty!")
+             continue
+            tasks.append({"task": task, "done": False})
+            save_task(tasks)
+            print("Task added")
+
+            add_another = input("Add another (y/n): ")
+
+            if add_another.lower() == "n":
+                break
+            elif add_another.lower() == "y":
+                continue
+            else:
+                print("Please enter y/n")
+                add_another = input("Add another (y/n): ")
 
     elif choose == "2":
         if len(tasks) == 0:
             print("No tasks yet!")
         else:
             for i, task in enumerate(tasks, 1):
-                print(i, "|", task["task"], "|", "✅" if task["done"] else "❌")
-        
-                
-                
-    elif choose == "3":
-         for i, task in enumerate(tasks, 1):
-            print(i, "|", task["task"], "|", "✅" if task["done"] == True else "❌")
+                print(i, "|", task["task"], "|", "✅" if task["done"] == True else "❌")
 
-        
-         number=int(input("Enter task number: "))
-         tasks[number - 1]["done"] = True
-         save_task(tasks)
-         print("Task change confirmed")
-       
-    
-    elif choose=="4":
+    elif choose == "3":
         for i, task in enumerate(tasks, 1):
             print(i, "|", task["task"], "|", "✅" if task["done"] == True else "❌")
-    
-        number1 = int(input("Task to delete: "))
-        tasks.pop(number1 - 1)
-        save_task(tasks)
-        print("Task was deleted")
 
+        while True:
+            try:
+                number = int(input("Task to change: "))
+            except ValueError:
+                print("Please enter a valid number!")
+                continue
+
+            if number < 1 or number > len(tasks):
+                print("Invalid task number!")
+                continue
+
+            tasks[number - 1]["done"] = True
+            save_task(tasks)
+            print("Task change confirmed")
+            break
+
+    elif choose == "4":
         
+        for i, task in enumerate(tasks, 1):
+            print(i, "|", task["task"], "|", "✅" if task["done"] == True else "❌")
 
+        while True:
+            try:
+                number1 = int(input("Task to delete: "))
+            except ValueError:
+                print("Please enter a valid number!")
+                continue
+
+            if number1 < 1 or number1 > len(tasks):
+                print("Invalid task number!")
+                continue
+
+            
+            tasks.pop(number1 - 1)
+            save_task(tasks)
+            print("Task was deleted")
+            break
     elif choose == "5":
-        print("Exiting!")
+         choose_task = int(input("Choose_task: "))
+         if 1 <= choose_task <= len(tasks):
+             task = tasks[choose_task - 1]
+             print(choose_task, "|", task["task"], "|", "✅" if task["done"] else "❌")
+         else:
+              print("Invalid task number.")
+                
+
+    elif choose == "6":
+        print("Exiting")
         exit()
 
     else:
-        print("Invalid choice. Please enter 1-3.")
+        print("Invalid choice. Please enter 1-5.")
+
+
+
+
+
+
+
